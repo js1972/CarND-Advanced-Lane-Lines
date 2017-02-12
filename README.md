@@ -87,7 +87,7 @@ Then I did some other stuff and fit my lane lines with a 2nd order polynomial ki
 
 I did this in lines # through # in my code in `my_other_file.py`
 
-####6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+#### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
 I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
 
@@ -95,16 +95,21 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 
 ---
 
-###Pipeline (video)
+### Pipeline (video)
 
-####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
+#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](output_images/project_video_output.mp4)
 
 ---
 
-###Discussion
+### Discussion
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.
+
+The results with very limited tuning of the image thresholding and no smoothing between frames or error handling are impressive on the test video.
+However it all falls apart on the challenge videos largely because of the different road surfaces and vertical lines in the surface.
+I can see that for every different road surfaces or driving conditions we would have to further tune the image thresholding and so on, which I think is a major limitation of this computer vision technique.
+So long as we could accumulate enough driving data I'd be much more inclined to use a deep convolutional network and let it train and find the lanes...
