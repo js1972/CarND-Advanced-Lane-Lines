@@ -40,7 +40,7 @@ This code is in cell 5 of the notebook: `undistort_image()`
 
 #### Camera distortion correction
 Below is an example of a before and after distortion-corrected test image. Note the repositioning of the white car which is actually further back once camera distortion is correct for...
-See cell 8 of the notebook for the code how I accomplished this. Its simply a matter of running the camera calibration using the already computer object and image points and then passing these to `cv2.undistort()`.
+See cell 8 of the notebook for the code how I accomplished this. Its simply a matter of running the camera calibration using the already computed object and image points and then passing these to `cv2.undistort()`.
 
 (One point to be careful of is that OpenCV reads and write images in BGR format. I use `cv2.cvtColor()` to switch to RGB and back again.)
 
@@ -57,7 +57,7 @@ Firstly I convert the image to the HSV colour space and grab the S-channel only 
 
 Additionally we use the OpenCV Sobel function to take the gradient of the image in the X direction. By taking the gradient in the X direction we can better pick out vertical features in the image (such as lane lines). The gradient is then thresholded as well between 20 and 100.
 
-Finally we merge these two thresholded images. At the bottom of the `threshold_binary()` function in cell 11 you can see that we form two images. One is for debugging purposes where we stack the two image on top of each other (`color_binary`) - enabling us to see in one image how each technique is contributing. The other (`combined_binary`) is simply a bitwise-or between the two images
+Finally we merge these two thresholded images. At the bottom of the `threshold_binary()` function in cell 11 you can see that we form two images. One is for debugging purposes where we stack the two images on top of each other (`color_binary`) - enabling us to see in one image how each technique is contributing. The other (`combined_binary`) is simply a bitwise-or between the two images
 
 Here's an example of my output for this step showing both the images described above.
 
@@ -113,7 +113,7 @@ Cells 17 and 18 show a faster method that can be used for finding the lanes on s
 
 ![Lanes lines detected in sample image](output_images/result.jpg)
 
-Notebook cell 19 shows the `draw_lanes_on_image()` function which I used to highlight the road lane lines with a filled polygon (`cv2.fillPoly()`). This function then un-warps the the image (using the inverse perspective transform parameters saved earlier - Minv) to show the completed result (as above).
+Notebook cell 19 shows the `draw_lanes_on_image()` function which I used to highlight the road lane lines with a filled polygon (`cv2.fillPoly()`). This function then un-warps the image (using the inverse perspective transform parameters saved earlier - Minv) to show the completed result (as above).
 
 The completed pipeline can be clearly seen in function `process_image()` in notebook cell 20. Cell 21 then executes this for one sample image.
 
@@ -122,10 +122,10 @@ The completed pipeline can be clearly seen in function `process_image()` in note
 The radius of curvature for each line and the position of the vehicle within the lane lines is calculated in function `get_curvature()` in cell 14. This function is called within my lane finding code (`find_lane_lines()`)
 
 Processing:
-- Convert from pixels to metres
-- Fit polynomials to the left and right lane line points again (this time in metres)
+- Convert from pixels to metre's
+- Fit polynomials to the left and right lane line points again (this time in real-world space instead of pixel-space)
 - Calculate the curvature as per the equation for radius from a 2nd order polynomial below (as a radius in metres)
-- Calculate the lane deviation from the center (between lane lines and assuming the camera is in the center of the car)
+- Calculate the lane deviation from the center (between lane lines and assuming the camera is in the center of the car) - again in real-world space.
 
 ![Equation of curvature for 2nd order polynomial](output_images/equation of curvature.png)
 
@@ -141,9 +141,6 @@ Here is a link to a processed video thats been run through my pipeline (describe
 ---
 
 ### Discussion
-
-#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
-
 The results with very limited tuning of the image thresholding and no smoothing between frames or error handling are impressive on the test video.
 However it all falls apart on the challenge videos largely because of the different road surfaces and vertical lines in the surface.
 
