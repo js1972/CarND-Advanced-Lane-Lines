@@ -13,6 +13,12 @@ The goals / steps of this project are the following:
 * Warp the detected lane boundaries back onto the original image.
 * Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
+The accompanying jupyter notebook `Advanced Lane Line Finding Workbook.ipynb` contains all the code mentioned in this readme file. A copy is also saved in html format as `Advanced+Lane+Line+Finding+Workbook.html`.
+
+Output of lane finding pipeline on sample video:
+
+[![Advanced Lane Finding for Udacity Self Driving Car Nanodegree](https://img.youtube.com/vi/yS0ocyJpHRU/0.jpg)](https://www.youtube.com/watch?v=yS0ocyJpHRU)
+
 ---
 ### Camera Calibration
 With a set of camera calibration images (chessboards) in the camera_cal folder I am able to calculate the camera distortion parameters and use these to un-distort our images.
